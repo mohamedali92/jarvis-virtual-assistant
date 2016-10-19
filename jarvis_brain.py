@@ -1,4 +1,5 @@
 import subprocess
+import pyowm
 
 
 def open_application(app_name):
@@ -22,4 +23,15 @@ def open_application(app_name):
             ["open", "-n", "/Applications/" + true_app_name], stdout=subprocess.PIPE)
     else:
         print 'No app with that name installed'
+def get_weather(city):
+	owm = pyowm.OWM('9a52c132091aca0a2566d332ec00474d')  # You MUST provide a valid API key
+
+	# Search for current weather in city
+	observation = owm.weather_at_place(city)
+	w = observation.get_weather()
+	temp = w.get_temperature('celsius')['temp']  # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
+	result_phrase =  "The temperature in " + city + " is: " + str(temp) + " Celcius"
+	print result_phrase
+	return result_phrase
+
 
