@@ -18,13 +18,13 @@ def listen():
 	    # instead of `r.recognize_google(audio)`
 	    #print("Google Speech Recognition thinks you said " + recognizer.recognize_google(audio))
 	    text = recognizer.recognize_google(audio)
-	    jarvis_brain.speak()
-	    print (text)
 	    speak(text)
+	    return text
 	except speech_recognition.UnknownValueError:
 	    print("Google Speech Recognition could not understand audio")
 	except speech_recognition.RequestError as e:
 	    print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
 
-listen()
+request = listen()
+jarvis_brain.open_application(request.split("open ")[1])
