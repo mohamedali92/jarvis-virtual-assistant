@@ -1,5 +1,6 @@
 from os import system
 import speech_recognition
+import jarvis_brain
 
 recognizer = speech_recognition.Recognizer()
 
@@ -17,6 +18,7 @@ def listen():
 	    # instead of `r.recognize_google(audio)`
 	    #print("Google Speech Recognition thinks you said " + recognizer.recognize_google(audio))
 	    text = recognizer.recognize_google(audio)
+	    jarvis_brain.speak()
 	    print (text)
 	    speak(text)
 	except speech_recognition.UnknownValueError:
